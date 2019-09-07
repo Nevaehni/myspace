@@ -4,5 +4,14 @@
 // Variables
 @import 'variables';
 
+// Custom CSS
+@import 'home';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+html, body
+{
+    background-color: #003399;
+    font-family: "Arial Rounded MT Bold";
+}
