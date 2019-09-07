@@ -2,11 +2,6 @@
 
 @section('content')
 
-
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-
 <div class="homeContainer">
     <div class="profileContainer">
         <img class="profileImage" src="https://p.w3layouts.com/demos/searching_profile_widget/web/images/img1.jpg" alt="Profile picture"> 
@@ -18,9 +13,7 @@
             <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla illum consequatur veniam doloremque non eius dolorem quasi ut tenetur odit hic magni id libero, vel dolor aut vero quia aliquam?</p>            
         </div>    
     </div>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-    </li>
+    
     <div class="searchContainer">
 
         <input class="searchBar" name="searchData" type="text" placeholder="Search"> 
