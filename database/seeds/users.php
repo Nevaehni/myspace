@@ -21,7 +21,12 @@ class users extends Seeder
             'first_name' => 'Sebahattin',
             'last_name' => 'Erzincan',
             'username' => 'Robocop',
+            'zipcode' => rand(1, 9999),
+            'streetname' => 'Street '.rand(1, 999),
+            'housenumber' => rand(1, 999),
+            'housenumbersuffix' => rand(1, 5),
             'relation' => '1',
+            'image' => 'default.jpg',
             'email' => '341089@talnet.nl',
             'password' => bcrypt('123456789'),                                             
         ]);
@@ -58,12 +63,16 @@ class users extends Seeder
        
         for ($i=0; $i < 30; $i++) 
         {
-
             DB::table('users')->insert([
                 'first_name' => $firstNameCollection[rand(0, count($firstNameCollection)-1)],
                 'last_name' => $lastNameCollection[rand(0, count($lastNameCollection)-1)],
                 'username' => 'Robocop'.rand(1, 99999999999999),
+                'zipcode' => rand(1, 9999),
+                'streetname' => 'Street'.rand(1, 999),
+                'housenumber' => rand(1, 999),
+                'housenumbersuffix' => rand(1, 5),
                 'relation' => rand(1, 7),
+                'image' => 'default.jpg',
                 'email' => '341089'.rand(1, 99999999999999).'@talnet.nl',
                 'password' => bcrypt('123456789'),                                             
             ]);

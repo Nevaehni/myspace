@@ -20,6 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->integer('relation');
             $table->string('email')->unique();
+            $table->string('image')->default('default.jpg');
+            $table->string('streetname');
+            $table->string('housenumber');
+            $table->string('housenumbersuffix');
+            $table->string('zipcode');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

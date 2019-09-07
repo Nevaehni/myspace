@@ -4,11 +4,11 @@
 
 <div class="homeContainer">
     <div class="profileContainer">
-        <img class="profileImage" src="https://p.w3layouts.com/demos/searching_profile_widget/web/images/img1.jpg" alt="Profile picture"> 
+        <img class="profileImage" src="{{asset('images/'.Auth::user()->image)}}" alt="Profile picture"> 
         <img class="thumbLogo" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
         <div class="descriptionContainer">
         <h1 class="name">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h1>
-            <h2 class="relation">Relation status: {{Auth::user()->relation}}</h2>
+            <h2 class="relation">Relation status: {{$relations->find(Auth::user()->relation)->description}}</h2>
             <br>
             <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla illum consequatur veniam doloremque non eius dolorem quasi ut tenetur odit hic magni id libero, vel dolor aut vero quia aliquam?</p>            
         </div>    

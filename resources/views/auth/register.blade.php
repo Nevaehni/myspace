@@ -54,6 +54,62 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="zipcode" class="col-md-4 col-form-label text-md-right">{{ __('Zipcode') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="zipcode" type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" value="{{ old('zipcode') }}" required autocomplete="zipcode" autofocus>
+
+                                @error('zipcode')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="houseNumber" class="col-md-4 col-form-label text-md-right">{{ __('House number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="houseNumber" type="text" class="form-control @error('houseNumber') is-invalid @enderror" name="houseNumber" value="{{ old('houseNumber') }}" required autocomplete="houseNumber" autofocus>
+
+                                @error('houseNumber')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="houseNumberSuffix" class="col-md-4 col-form-label text-md-right">{{ __('House number suffix') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="houseNumberSuffix" type="text" class="form-control @error('houseNumberSuffix') is-invalid @enderror" name="houseNumberSuffix" value="{{ old('houseNumberSuffix') }}" required autocomplete="houseNumberSuffix" autofocus>
+
+                                @error('houseNumberSuffix')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="streetName" class="col-md-4 col-form-label text-md-right">{{ __('Street') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="streetName" type="text" class="form-control @error('streetName') is-invalid @enderror" name="streetName" value="{{ old('streetName') }}" required autocomplete="streetName" autofocus>
+
+                                @error('streetName')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="relation" class="col-md-4 col-form-label text-md-right">{{ __('Relation status') }}</label>
 
                             <div class="col-md-6">
