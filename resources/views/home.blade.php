@@ -1,16 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
+@php
 
+if(auth::user() != null)
+{
+    if(isset($findUser) != false)
+    {
+        $user = $finduser;
+    }        
+    else
+    {
+        $user = auth::user();
+    } 
+}   
+else{
+    if(isset($findUser) != false)
+    {
+        $user = $finduser;
+    }
+    else
+    {
+        $user = false;
+    }     
+}
+
+@endphp
 <div class="homeContainer">
-    <div class="profileContainer">
-        <img class="profileImage" src="{{asset('images/'.Auth::user()->image)}}" alt="Profile picture"> 
+    <div class="profileContainer">   
+        @if($user != false)
+            <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
+        @endif
+
         <img class="thumbLogo" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
         <div class="descriptionContainer">
-        <h1 class="name">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h1>
-            <h2 class="relation">Relation status: {{$relations->find(Auth::user()->relation)->description}}</h2>
-            <br>
-            <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla illum consequatur veniam doloremque non eius dolorem quasi ut tenetur odit hic magni id libero, vel dolor aut vero quia aliquam?</p>            
+            @if($user != false)
+                @if(auth::user() != null)
+                    <h1 class="name">{{$user->first_name}} {{$user->last_name}}</h1>
+                    <h2 class="relation">Relation status: {{$relations->find($user->relation)->description}}</h2>
+                @else
+                    <h1 class="name">{{$user->username}}</h1>
+                @endif
+            @else
+                <span class="guestSearch"> Use the search function to stalk some people ! </span>
+            @endif
+            <br>            
         </div>    
     </div>
     
@@ -26,7 +60,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     $('#searchBar').keyup(function(){ 
         var query = $(this).val();
         if(query != '')
@@ -48,5 +82,5 @@
         $('#searchBar').val($(this).text());  
         $('#searchResults').fadeOut();  
     }); 
-</script>
+</script> --}}
 @endsection
