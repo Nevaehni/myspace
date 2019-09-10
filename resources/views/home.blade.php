@@ -26,13 +26,24 @@ else{
 }
 
 @endphp
-<div class="homeContainer">
-    <div class="profileContainer">   
-        @if($user != false)
-            <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
-        @endif
 
-        <img class="thumbLogo" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
+<div class="homeContainer">
+    @if($user == false)
+        <span class="guestSearch"> Use the search function to stalk some people ! </span>
+    @endif
+        
+    <div class="profileContainer">  
+         
+        @if($user != false)
+            @if(isset($findUser) != false)
+                <img class="func_img" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
+                <p class="img_description">Like profile</p>
+            @else                
+                <img class="func_img" src="{{asset('images/settings.png')}}" alt="Settings logo">
+                {{-- <span class="img_description"> Edit profile </span>                --}}
+            @endif
+            <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
+        @endif        
         <div class="descriptionContainer">
             @if($user != false)
                 @if(auth::user() != null)
@@ -42,7 +53,7 @@ else{
                     <h1 class="name">{{$user->username}}</h1>
                 @endif
             @else
-                <span class="guestSearch"> Use the search function to stalk some people ! </span>
+                
             @endif
             <br>            
         </div>    

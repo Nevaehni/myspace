@@ -1,11 +1,21 @@
+.homeContainer
+{
+    display: flex;
+    top: 5%;
+    position: relative;
+    width: 720px;
+    height: 700px;
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 .profileContainer
 {
-    width: 500px;
-    height: 700px;
-    top: 10vh;
-    left: 25vw;
+    width: 71.5%;
+    height: 100%;
     position: relative;
-    background-color: #2367ee;
+    background-color: #4178b6;
     border-top-left-radius: 50%;
     border-bottom-right-radius: 45%;
     box-shadow: 0px 0px 70px -10px black;
@@ -14,7 +24,7 @@
 .profileContainer::before
 {
     content: "";
-    background-color: #376eda;
+    background-color: #4B85C6;
     width: 120px;
     height: 150px;
     position: absolute;
@@ -23,56 +33,49 @@
     box-shadow: 0px 0px 70px -10px black;
 }
 
-.thumbLogo
+.func_img
 {
-    width: 50px;
-    top: -200px;
-    left: 40px;
+    height: 35px;
+    top: 9%;
+    left: 9%;
     position: relative;
     display: block;
-    -webkit-transition: transform 0.2s ease-in-out;
-    -moz-transition: transform 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
+    transform: rotate(180deg);    
 }
 
-.thumbLogo:hover 
-{
+.func_img:hover 
+{    
     transform: scale(1.2); 
 }
 
 .profileImage
 {
     border-radius: 50%;
-    width: 50%;
+    width: 30%;
     margin: auto;
     position: relative;
     display: block;
-    margin-top: 8px;
+    top: 4%;
     box-shadow: 3px 0px 15px 1px black;
 }
 
 .descriptionContainer
 {
+    top: 10%;
     position: relative;
     text-align: center;
     color: #ffffff;
-}
-
-.homeContainer
-{
-    display: flex;
 }
 
 .searchContainer 
 {
     display: inline-block;
     position: relative;
-    width: 200px;
-    height: 150px;
-    top: 10vh;
-    left: 25vw;
+    width: 28.5%;
+    height: 30%;
     padding: 10px;
-    background-color: #2367EE;
+    background-color: #4178b6;
     border-radius: 13px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
@@ -109,6 +112,8 @@
 }
 
 .guestSearch{
-    top: 40px;
+    top: 0;
+    left: 44%;
     position: fixed;
+    color: white;
 }
