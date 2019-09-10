@@ -30,6 +30,7 @@
   border-top-left-radius: 100%;
   border-bottom-right-radius: 65%;
   box-shadow: 0px 0px 70px -10px black;
+  transform: rotate(25deg);
 }
 
 .func_img {

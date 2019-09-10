@@ -37,10 +37,10 @@ else{
         @if($user != false)
             @if(isset($findUser) != false)
                 <img class="func_img" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
-                <p class="img_description">Like profile</p>
+                {{-- <span class="img_description">Like profile</span> --}}
             @else                
                 <img class="func_img" src="{{asset('images/settings.png')}}" alt="Settings logo">
-                {{-- <span class="img_description"> Edit profile </span>                --}}
+                {{-- <span class="img_description">Edit profile</span>                --}}
             @endif
             <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
         @endif        

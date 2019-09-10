@@ -26,4 +26,10 @@ class HomeController extends Controller
     {
         return view('home')->with('relations', Relation::all());
     }
+
+    // public function findUser($id)
+    // {
+    //     dd($id);
+    //     return view('home')->with('relations', Relation::all());
+    // }
 }
