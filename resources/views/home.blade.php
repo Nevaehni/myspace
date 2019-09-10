@@ -49,6 +49,8 @@ else{
                 @if(auth::user() != null)
                     <h1 class="name">{{$user->first_name}} {{$user->last_name}}</h1>
                     <h2 class="relation">Relation status: {{$relations->find($user->relation)->description}}</h2>
+                    <h4 class="relation">Email: {{$user->email}}</h4>
+                    <h4 class="relation">Adres: {{$user->streetname}}, {{$user->housenumber}} {{$user->housenumbersuffix}}. Zipcode: {{$user->zipcode}}</h4>
                 @else
                     <h1 class="name">{{$user->username}}</h1>
                 @endif
