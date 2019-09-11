@@ -28,19 +28,22 @@ else{
 @endphp
 
 <div class="pageContentContainer">
-
     <div class="homeContainer">  
         <div class="profileContainer"> 
+
             @if($user != false)
-                @if(isset($findUser) != false && $findUser->id != Auth::id())
-                    <img class="func_img" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
+                @if(isset($findUser) != false && $findUser->id != Auth::id() && Auth::user() != false)
+                    <img class="func_img" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
                     {{-- <span class="img_description">Like profile</span> --}}
-                @else                
+                @elseif(Auth::user() != false)                
                     <img class="func_img" src="{{asset('images/settings.png')}}" alt="Settings logo">
-                    {{-- <span class="img_description">Edit profile</span>                --}}
+                    {{-- <span class="img_description">Edit profile</span> --}}
                 @endif
                 <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
-            @endif        
+            @endif  
+
+            <meta name="csrf-token" content="{{ csrf_token() }}">  
+
             <div class="descriptionContainer">
                 @if($user != false)
                     @if(auth::user() != null)
@@ -69,24 +72,21 @@ else{
         </div>
     </div>
 
-
     {{-- shows users in the list  --}}
     <div class="users" class="active">
         <div class="all_users">
-        {{-- loop through all users --}}
-            @if($user != false)
-                @foreach($users as $u)
-                {{-- dont show the current user in the list --}}
-                    @if($user->id != $u->id)
-                    <a class="user-name module" href="{{ route('home.getuser', [$u->id]) }}">
-                        <img src="{{asset('images/'.$u->image)}}" class="user-avatar" alt="">
-                        <span class="user-name-text">                
-                                {{$u->first_name.' '.$u->last_name}}
-                        </span>
-                        </a>
-                    @endif
-                @endforeach
-            @endif  
+        {{-- loop through all users --}}            
+            @foreach($users as $u)                
+            {{-- dont show the current user in the list --}}
+                @if(@$user->id != $u->id)
+                <a class="user-name module" href="{{ route('home.getuser', [$u->id]) }}">
+                    <img src="{{asset('images/'.$u->image)}}" class="user-avatar" alt="">
+                    <span class="user-name-text">                
+                        {{$u->first_name.' '.$u->last_name}}
+                    </span>
+                    </a>
+                @endif
+            @endforeach
         </div>
     </div>
 
@@ -94,7 +94,20 @@ else{
 </div>
 
 
-
+{{-- <script>
+function like(id_user, token)
+{
+    $.ajax({
+        type: "POST",
+        url: id_user,
+        data: { id_user, _token: token},
+        success: function (response) 
+        {   
+            console.log('success', response)
+        },
+    });
+}
+</script> --}}
 
 
 

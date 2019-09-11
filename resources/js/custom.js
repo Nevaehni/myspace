@@ -1,3 +1,15 @@
+function like(id_user, token)
+{
+    $.ajax({
+        type: "POST",
+        url: id_user,
+        data: { id_user, _token: token},
+        success: function (response) 
+        {   
+            console.log(response)
+        },
+    });
+}
 
 // $('#searchBar').keyup(function(){ 
 //     var query = $(this).val();
@@ -33,6 +45,5 @@
 // 		updater: function (item) {
 // 			/* navigate to the selected item */
 // 			window.location.href = "{{ url('bedrijven') }}/"+item["slug"];
-// 		},
-        
+// 		},        
 // 	});

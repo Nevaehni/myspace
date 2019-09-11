@@ -40,22 +40,27 @@ class HomeController extends Controller
             $inTable = Like::where('liked_user_id', $id)->where('user_id', Auth::id())->get();
             if(count($inTable) == 0 )
             {
+                $newLike = new Like;
+                $newLike->user_id = Auth::id();
+                $newLike->liked_user_id = $id;
+                $newLike->save();
+
                 return 'liked';
             }
             else
             {
-                return 'disliked';
+                Like::where('liked_user_id', $id)->where('user_id', Auth::id())->delete();
+                return 'unliked';
             }
         }
         else
         {
             return 'you cant like yourself';
         }
-        
     }
     
     public function getUser($id)
-    {        
+    {       
         return view('home')->with([
             'relations' => Relation::all(),
             'users' => User::orderBy('first_name')->get(),

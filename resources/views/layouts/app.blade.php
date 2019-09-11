@@ -8,7 +8,7 @@
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    
 </head>
 <body>
     
@@ -26,5 +26,8 @@
         @yield('content')   
                 
     </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+    
 </body>
 </html>

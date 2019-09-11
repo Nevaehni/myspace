@@ -113,16 +113,13 @@
                             <label for="relation" class="col-md-4 col-form-label text-md-right">{{ __('Relation status') }}</label>
 
                             <div class="col-md-6">
-                                {{-- <input id="relation" type="text" class="form-control @error('relation') is-invalid @enderror" name="relation" value="{{ old('relation') }}" required autocomplete="relation" autofocus> --}}
-
+                                                                
                                 <select class="form-control" name="relation">
-                                    <option value="1">Single</option>
-                                    <option value="2">It’s Complicated</option>
-                                    <option value="3">In a Relationship</option>
-                                    <option value="4">Engaged</option>
-                                    <option value="5">Married</option>
-                                    <option value="6">In a Domestic Partnership</option>
-                                    <option value="7">Divorced / Separated</option>
+                                    @foreach(App\Relation::all() as $r)
+                                    {
+                                        <option value="{{$r->id}}">{{$r->description}}</option>
+                                    }
+                                    @endforeach
                                 </select>
 
                                 @error('relation')

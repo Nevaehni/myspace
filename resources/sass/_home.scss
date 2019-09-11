@@ -58,13 +58,13 @@
 .func_img
 {
     height: 35px;
-    top: 9%;
+    top: 9%; 
     left: 9%;
-    position: relative;
-    display: block;
+    position: relative; 
+    display: block; 
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
-    transform: rotate(180deg);    
+    transform: rotate(180deg);  
 }
 
 .func_img:hover 
