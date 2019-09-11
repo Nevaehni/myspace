@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Home page
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{id}', 'HomeController@getUser')->name('home.getuser');
+Route::post('/home/{id}', 'HomeController@likedUser')->name('home.like');
+
 
 
 

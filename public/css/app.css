@@ -1,14 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.pageContentContainer {
+  display: flex;
+  margin: auto;
+  width: 990px;
+}
+
 .homeContainer {
   display: flex;
   top: 1%;
-  position: relative;
+  /* position: relative; */
   width: 720px;
   height: 700px;
-  margin: auto;
-  padding-right: 10px;
-  padding-left: 10px;
+  margin: 0px 25px 0px 0px;
+  /* margin: auto; */
+  /* padding-right: 10px; */
+  /* padding-left: 10px; */
 }
 
 .profileContainer {
@@ -54,6 +61,7 @@
   position: relative;
   display: block;
   transition: transform 0.2s ease-in-out;
+  cursor: pointer;
   transform: rotate(180deg);
 }
 
@@ -122,6 +130,49 @@
   left: 44%;
   position: fixed;
   color: white;
+}
+
+.users {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 235px;
+}
+
+.users a {
+  text-decoration: none;
+  padding: 5px;
+  color: #76daff;
+  position: relative;
+  background: #2d303a;
+  border-radius: 6px;
+  display: flex;
+}
+
+.users img {
+  width: 15px;
+  height: 15px;
+  margin: 3px 10px 0 1px;
+  outline: 0;
+  border: 0;
+  border-radius: 10px;
+}
+
+.users span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.users span:hover {
+  overflow: visible;
+}
+
+.all_users {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
+  margin: 0 0 1rem 0;
 }
 
 /*!
@@ -10772,9 +10823,5 @@ html,
 body {
   background-color: #003399;
   font-family: "Arial Rounded MT Bold";
-}
-
-#app {
-  height: 100vh;
 }
 

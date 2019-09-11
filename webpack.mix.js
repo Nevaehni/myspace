@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
 		'resources/js/custom.js',		
 	], 'public/js/main.js')
    .sass('resources/sass/app.scss', 'public/css')
-   mix.browserSync('localhost/myspace/public');
+   mix.browserSync('localhost/woofspace/public');
