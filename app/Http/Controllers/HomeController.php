@@ -31,7 +31,7 @@ class HomeController extends Controller
             'relations' => Relation::all(),
             'users' => User::orderBy('first_name')->get()
             ]);
-    }
+    }   
 
     public function likedUser($id)
     {

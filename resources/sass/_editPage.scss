@@ -1,0 +1,12 @@
+.browseLogo{
+    width: 55px;
+    position: absolute;
+    right: 180px;
+    top: 60px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.browseLogo:hover{
+    transform: scale(1.2);   
+}

@@ -36,7 +36,8 @@ else{
                     <img class="func_img" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
                     {{-- <span class="img_description">Like profile</span> --}}
                 @elseif(Auth::user() != false)                
-                    <img class="func_img" src="{{asset('images/settings.png')}}" alt="Settings logo">
+                    <img class="func_img" onclick="edit()" src="{{asset('images/settings.png')}}" alt="Settings logo">
+                    <a id="editPageRedirect" href="{{ route('edit') }}"></a>
                     {{-- <span class="img_description">Edit profile</span> --}}
                 @endif
                 <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
@@ -49,8 +50,8 @@ else{
                     @if(auth::user() != null)
                         <h1 class="name">{{$user->first_name}} {{$user->last_name}}</h1>
                         <h2 class="relation">Relation status: {{$relations->find($user->relation)->description}}</h2>
-                        <h4 class="relation">Email: {{$user->email}}</h4>
-                        <h4 class="relation">Adres: {{$user->streetname}}, {{$user->housenumber}} {{$user->housenumbersuffix}}. Zipcode: {{$user->zipcode}}</h4>
+                        <h4 class="email">Email: {{$user->email}}</h4>
+                        <h4 class="adres">Adres: {{$user->streetname}}, {{$user->housenumber}} {{$user->housenumbersuffix}}. Zipcode: {{$user->zipcode}}</h4>
                     @else
                         <h1 class="name">{{$user->username}}</h1>
                     @endif                          
@@ -89,86 +90,6 @@ else{
             @endforeach
         </div>
     </div>
-
-
 </div>
 
-
-{{-- <script>
-function like(id_user, token)
-{
-    $.ajax({
-        type: "POST",
-        url: id_user,
-        data: { id_user, _token: token},
-        success: function (response) 
-        {   
-            console.log('success', response)
-        },
-    });
-}
-</script> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- <script>
-    $('#searchBar').keyup(function(){ 
-        var query = $(this).val();
-        if(query != '')
-        {
-         var _token = $('input[name="_token"]').val();
-         $.ajax({
-          url:"{{ route('autocomplete.fetch') }}",
-          method:"POST",
-          data:{query:query, _token:_token},
-          success:function(data){
-           $('#searchResults').fadeIn();  
-                    $('#searchResults').html(data);
-          }
-         });
-        }
-    });
-    
-    $(document).on('click', 'li', function(){  
-        $('#searchBar').val($(this).text());  
-        $('#searchResults').fadeOut();  
-    }); 
-</script> --}}
 @endsection

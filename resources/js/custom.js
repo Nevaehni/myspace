@@ -1,3 +1,4 @@
+//Like Function
 function like(id_user, token)
 {
     $.ajax({
@@ -11,39 +12,28 @@ function like(id_user, token)
     });
 }
 
-// $('#searchBar').keyup(function(){ 
-//     var query = $(this).val();
-//     if(query != '')
-//     {
-//      var _token = $('input[name="_token"]').val();
-//      $.ajax({
-//       url:"{{ route('autocomplete.fetch') }}",
-//       method:"POST",
-//       data:{query:query, _token:_token},
-//       success:function(data){
-//        $('#searchResults').fadeIn();  
-//                 $('#searchResults').html(data);
-//       }
-//      });
-//     }
-// });
+function edit()
+{    
+    document.getElementById('editPageRedirect').click();
+}
 
-// $(document).on('click', 'li', function(){  
-//     $('#searchBar').val($(this).text());  
-//     $('#searchResults').fadeOut();  
-// });
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-// var path = "{{ route('autocomplete') }}";
-// 	$('input.typeahead').typeahead({
-// 		source:  function (query, process) {
-// 		return $.get(path, { query: query }, function (data) {
-// 				return process(data);
-// 			});
-// 		},
-// 		autoSelect: true,
-// 		fitToElement: true,
-// 		updater: function (item) {
-// 			/* navigate to the selected item */
-// 			window.location.href = "{{ url('bedrijven') }}/"+item["slug"];
-// 		},        
-// 	});
+        reader.onload = function(e) {
+            console.log(e);
+            $('#profileImage').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    $("#imgInp").change(function() {
+    readURL(this);
+});
+
+function uploadImg()
+{    
+    document.getElementById('imgInp').click();
+}
