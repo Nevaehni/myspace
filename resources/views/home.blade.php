@@ -33,10 +33,10 @@ else{
 
             @if($user != false)
                 @if(isset($findUser) != false && $findUser->id != Auth::id() && Auth::user() != false)
-                    <img class="func_img" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
+                    <img class="func_img" title="Like" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
                     {{-- <span class="img_description">Like profile</span> --}}
                 @elseif(Auth::user() != false)                
-                    <img class="func_img" onclick="edit()" src="{{asset('images/settings.png')}}" alt="Settings logo">
+                    <img class="func_img" title="Change profile" onclick="edit()" src="{{asset('images/settings.png')}}" alt="Settings logo">
                     <a id="editPageRedirect" href="{{ route('edit') }}"></a>
                     {{-- <span class="img_description">Edit profile</span> --}}
                 @endif

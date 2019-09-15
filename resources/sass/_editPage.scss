@@ -1,12 +1,39 @@
-.browseLogo{
+.browseLogo
+{
     width: 55px;
     position: absolute;
     right: 180px;
-    top: 60px;
+    top: 0;
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
 }
 
-.browseLogo:hover{
+.browseLogo:hover
+{
     transform: scale(1.2);   
+}
+
+.func_img_edit
+{
+    height: 35px;
+    left: 9%;
+    position: absolute;
+    top: 6%;
+    display: block;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.func_img_edit:hover
+{
+    transition: 0.8s;
+    left: 7%;
+  
+}
+
+.mainForm
+{
+    top: 5%;
+    position: absolute;
 }
