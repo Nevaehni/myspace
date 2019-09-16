@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->integer('relation');
             $table->string('email')->unique();
             $table->string('image')->default('default.jpg');
+            $table->string('image_size')->default(8.188);
+            $table->string('image_original_name')->default('default.jpg');
             $table->string('streetname');
             $table->string('housenumber');
             $table->string('housenumbersuffix');

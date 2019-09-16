@@ -3,6 +3,7 @@
 @section('content')
 @php
 
+//$user always changes depending on the selected and logged-in user.
 if(auth::user() != null)
 {
     if(isset($findUser) != false)
@@ -30,17 +31,23 @@ else{
 <div class="pageContentContainer">
     <div class="homeContainer">  
         <div class="profileContainer"> 
-
+            {{-- If user is logged in --}}
             @if($user != false)
+                {{-- if the logged user is on someone elses page. --}}
                 @if(isset($findUser) != false && $findUser->id != Auth::id() && Auth::user() != false)
-                    <img class="func_img" title="Like" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/thumb_up.png')}}" alt="Like logo">
-                    {{-- <span class="img_description">Like profile</span> --}}
+                    @if( App\Like::where('user_id', Auth::id())->where('liked_user_id', $user->id)->first() == null )
+                        <img class="func_img_like" id="functional_image" title="Like" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/like.png')}}" alt="Like logo">
+                    @else
+                        <img class="func_img_unlike" id="functional_image" title="Like" onclick="like({{$user->id}}, '{{csrf_token()}}')" src="{{asset('images/unlike.png')}}" alt="Unlike">
+                    @endif
+                {{-- if on the logged user page --}}
                 @elseif(Auth::user() != false)                
                     <img class="func_img" title="Change profile" onclick="edit()" src="{{asset('images/settings.png')}}" alt="Settings logo">
-                    <a id="editPageRedirect" href="{{ route('edit') }}"></a>
-                    {{-- <span class="img_description">Edit profile</span> --}}
+                    <a id="editPageRedirect" href="{{ route('edit') }}"></a>                   
+                @else
+                    <img class="func_img" style="cursor:none;visibility: hidden;">
                 @endif
-                <img class="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">         
+                <img class="profileImage" src="{{asset('images/users/'.$user->image)}}" alt="Profile picture">         
             @endif  
 
             <meta name="csrf-token" content="{{ csrf_token() }}">  
@@ -59,18 +66,12 @@ else{
             </div>    
         </div>
         
-        <div class="searchContainer">
-            <input class="searchBar" name="searchData" type="text" placeholder="Search"> 
-            <div id="searchResults"></div>
-            <button class="searchBtn">
-                <i class="fas fa-search"></i>
-            </button> 
-            {{ csrf_field() }}       
+        {{-- removed search function --}}
+        <div class="searchContainer">            
+            <button class="searchBtn">                
+            </button>     
         </div>
 
-        <div class="userList">
-            
-        </div>
     </div>
 
     {{-- shows users in the list  --}}
@@ -78,12 +79,17 @@ else{
         <div class="all_users">
         {{-- loop through all users --}}            
             @foreach($users as $u)                
-            {{-- dont show the current user in the list --}}
+            {{-- Don't show the current user in the list --}}
                 @if(@$user->id != $u->id)
                 <a class="user-name module" href="{{ route('home.getuser', [$u->id]) }}">
                     <img src="{{asset('images/'.$u->image)}}" class="user-avatar" alt="">
-                    <span class="user-name-text">                
-                        {{$u->first_name.' '.$u->last_name}}
+                    <span class="user-name-text"> 
+                        {{-- if the user isnt logged in, only show the usernames      --}}
+                        @if(Auth::user() != null)          
+                            {{$u->first_name.' '.$u->last_name}}
+                        @else
+                            {{$u->username}}
+                        @endif
                     </span>
                     </a>
                 @endif

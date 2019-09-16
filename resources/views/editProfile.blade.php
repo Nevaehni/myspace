@@ -10,16 +10,16 @@
     <div class="homeContainer">  
         <div class="profileContainer"> 
 
-            <form method="POST" class="mainForm" action="{{ route('edit.update') }}">
+            <form method="POST" class="mainForm" action="{{ route('edit.update') }}" enctype="multipart/form-data">
                 @csrf   
 
                 <img class="func_img_edit" title="Go back" onclick="home()" src="{{asset('images/go_back.png')}}" alt="Settings logo">
                 <a id="homePageRedirect" href="{{ route('home') }}"></a>
 
-                <img class="profileImage" id="profileImage" src="{{asset('images/'.$user->image)}}" alt="Profile picture">   
+                <img class="profileImage" id="profileImage" src="{{asset('images/users/'.$user->image)}}" alt="Profile picture">   
                 <img class="browseLogo"  title="Upload image" onclick="uploadImg()" src="{{asset('images/browse.png')}}" alt="Profile picture">     
             
-                <input style="visibility:hidden; position:fixed;" name="image" type='file' id="imgInp" accept="image/png,image/gif,image/jpeg,image/jpg,image/svg" />
+                <input style="visibility:hidden; position:fixed;" name="imageUpload" type='file' id="imageUpload" accept="image/png,image/gif,image/jpeg,image/jpg,image/svg" />
                 
                 <div class="descriptionContainer">                   
                     

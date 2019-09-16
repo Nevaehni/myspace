@@ -1,4 +1,4 @@
-//Like Function
+//Like/unlike Function
 function like(id_user, token)
 {
     $.ajax({
@@ -7,21 +7,25 @@ function like(id_user, token)
         data: { id_user, _token: token},
         success: function (response) 
         {   
+            alert(response)
             console.log(response)
         },
     });
 }
 
+//Edit page redirect button
 function edit()
 {    
     document.getElementById('editPageRedirect').click();
 }
 
+//Home page redirect button
 function home()
 {    
     document.getElementById('homePageRedirect').click();
 }
 
+//Display the image before uploading on the edit page
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -34,11 +38,12 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-    $("#imgInp").change(function() {
+    $("#imageUpload").change(function() {
     readURL(this);
 });
 
+//Make image clickable to select the file to upload.
 function uploadImg()
 {    
-    document.getElementById('imgInp').click();
+    document.getElementById('imageUpload').click();
 }

@@ -6,19 +6,13 @@
 
 // Custom CSS
 @import 'home';
-@import 'homeAnimations';
 @import 'editPage';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-html, body
+body
 {
     background-color: #003399;
     font-family: "Arial Rounded MT Bold";
-}
-
-#app{
-    // height: 100vh;
-
 }

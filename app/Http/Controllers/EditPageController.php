@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
 use Illuminate\Support\Facades\Input;
 use App\Relation;
+use Auth;
 
 class EditPageController extends Controller
 {
+    //return the edit view
     public function profileindex()
     {
         if(Auth::user() != null)
@@ -26,28 +27,51 @@ class EditPageController extends Controller
 
     public function updateUser(request $request)
     {
-        // $yes = $request->validate([      
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',  
-        //     'first_name' => ['required', 'string', 'max:255'],
-        //     'last_name' => ['required', 'string', 'max:255'],
-        //     'username' => ['required', 'string', 'max:255'],
-        //     'relation' => ['required', 'integer', 'max:1'],
-        //     'housenumber' => ['required', 'string', 'max:255'],
-        //     'streetname' => ['required', 'string', 'max:255'],
-        //     'housenumbersuffix' => ['required', 'string', 'max:255'],
-        //     'zipcode' => ['required', 'string', 'max:255'],
-        //     'relation' => ['required', 'integer', 'max:20'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::id()],
-        // ]);     
-
-        // $image = explode(".", $image_icon);
-        // $image_name = $image[0];
-        // $image_extension = array_slice($image , -1, 1);
-
-        // $data['image'] = $image_name.time().'.'.$image_extension[0];
-            
-        dd('fix image upload');
+        //Validate request
+        $request->validate([      
+            'imageUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',  
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'relation' => ['required', 'integer', 'max:1'],
+            'housenumber' => ['required', 'string', 'max:255'],
+            'streetname' => ['required', 'string', 'max:255'],
+            'housenumbersuffix' => ['required', 'string', 'max:255'],
+            'zipcode' => ['required', 'string', 'max:255'],
+            'relation' => ['required', 'integer', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::id()],
+        ]); 
+        
+        $imageName = Auth::user()->image;
+        $imageSize = Auth::user()->image_size;
+        $defaultImageName = Auth::user()->image_original_name;
         $user = Auth::user();
+      
+        //Image upload
+        if($request->hasFile('imageUpload'))
+        {       
+            $currentUser = Auth::user();
+            $imageSize = $request->file('imageUpload')->getSize();
+            $defaultImageName =  $request->file('imageUpload')->getClientOriginalName();
+            $defaultPath = public_path('/images/users/');
+            
+            //Check if the user is uploading the same file.
+            if($imageSize != $currentUser->image_size && $defaultImageName != $currentUser->image_original_name)
+            {
+                $image = $request->file('imageUpload');
+                $imageName = time().Auth::id().'.'.$image->getClientOriginalExtension();                            
+                $image->move($defaultPath, $imageName);
+            }    
+            //Check if the file still exists, if not upload the file. 
+            else if(!is_file($defaultPath.date_format($currentUser->updated_at, 'U').$currentUser->id.'.'.$request->file('imageUpload')->getClientOriginalExtension()))
+            {
+                $image = $request->file('imageUpload');
+                $imageName = time().Auth::id().'.'.$image->getClientOriginalExtension();                            
+                $image->move($defaultPath, $imageName);
+            }
+        }         
+        
+        //Save data
         $user->first_name = $request->first_name;      
         $user->last_name = $request->last_name;      
         $user->username = $request->username;      
@@ -57,8 +81,11 @@ class EditPageController extends Controller
         $user->zipcode = $request->zipcode;      
         $user->relation = $request->relation;      
         $user->email = $request->email;      
-        // $user->save();
+        $user->image = $imageName;
+        $user->image_size = $imageSize;
+        $user->image_original_name = $defaultImageName;
+        $user->save();
            
-        // return redirect()->back();
+        return redirect()->back();
     }
 }

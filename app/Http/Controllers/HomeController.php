@@ -25,6 +25,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    //Home view
     public function index()
     {
         return view('home')->with([
@@ -32,9 +33,10 @@ class HomeController extends Controller
             'users' => User::orderBy('first_name')->get()
             ]);
     }   
-
+    //Like/unlike system
     public function likedUser($id)
     {
+        //if the liked id is not the same as the logged in user
         if(Auth::id() != $id)
         {
             $inTable = Like::where('liked_user_id', $id)->where('user_id', Auth::id())->get();
@@ -45,20 +47,21 @@ class HomeController extends Controller
                 $newLike->liked_user_id = $id;
                 $newLike->save();
 
-                return 'liked';
+                return "You've liked this person";
             }
             else
             {
                 Like::where('liked_user_id', $id)->where('user_id', Auth::id())->delete();
-                return 'unliked';
+                
+                return "You've unliked this person";
             }
         }
         else
         {
-            return 'you cant like yourself';
+            return "You can't like yourself";
         }
     }
-    
+    //Get all users to show in the list
     public function getUser($id)
     {       
         return view('home')->with([
