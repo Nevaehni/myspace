@@ -15,7 +15,8 @@ if(auth::user() != null)
         $user = auth::user();
     } 
 }   
-else{
+else
+{
     if(isset($findUser) != false)
     {
         $user = $findUser;
@@ -66,10 +67,19 @@ else{
             </div>    
         </div>
         
-        {{-- removed search function --}}
-        <div class="searchContainer">            
-            <button class="searchBtn">                
-            </button>     
+        <div class="searchContainer">
+            <input id="searchBar" class="searchBar" name="searchData" type="text" placeholder="Search"> 
+            <div id="searchResults">
+
+            </div>
+            <button class="searchBtn">
+                <i class="fas fa-search"></i>
+            </button> 
+            <input id="_token" type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     
+        </div>@csrf
+
+        <div class="userList">
+            
         </div>
 
     </div>
@@ -82,7 +92,7 @@ else{
             {{-- Don't show the current user in the list --}}
                 @if(@$user->id != $u->id)
                 <a class="user-name module" href="{{ route('home.getuser', [$u->id]) }}">
-                    <img src="{{asset('images/'.$u->image)}}" class="user-avatar" alt="">
+                    <img src="{{asset('images/users/'.$u->image)}}" class="user-avatar" alt="">
                     <span class="user-name-text"> 
                         {{-- if the user isnt logged in, only show the usernames      --}}
                         @if(Auth::user() != null)          
@@ -98,4 +108,31 @@ else{
     </div>
 </div>
 
+
+<script>
+
+$(document).ready(function()
+{
+    $('#searchBar').keyup(function(e)
+    {
+        var token = $('#_token').val();
+        var searchInput = $('#searchBar').val();
+        e.preventDefault();
+
+        var form = $('#hdTutoForm').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('home.search') }}",
+            data: { searchInput, _token: token},
+            
+            success: function(response)
+            {
+                console.log(response);
+                $('#searchResults').html(response);
+            }
+        });
+    });
+});
+</script>
 @endsection

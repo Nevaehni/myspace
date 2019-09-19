@@ -225,6 +225,11 @@
   align-items: center;
 }
 
+#searchResults {
+  height: 85%;
+  overflow: hidden;
+}
+
 .guestSearch {
   top: 0;
   left: 44%;

@@ -6,6 +6,15 @@
     $user = auth::user();  
     
 @endphp
+
+<style>
+
+.invalid-feedback
+{
+    display: unset !important;
+}
+
+</style>
 <div class="pageContentContainer">
     <div class="homeContainer">  
         <div class="profileContainer"> 
@@ -108,18 +117,29 @@
                             <br>
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+                    @enderror                
                     <br>
+                    <label for="password">Password</label>
+                    <Br>
+                    <input id="password" type="password" name="password" placeholder="Password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <br>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
+                    <Br>
+                    <Br>
                     <button class="btn btn-primary" type="submit">Save</button>
                 </div>                   
             </div>
         </form>
         
-        <div class="searchContainer">
-                {{-- @if ($errors->any())
-                    {{ implode('', $errors->all(':message')) }}
-                @endif               --}}
+        <div class="searchContainer">            
+            <button class="searchBtn">                
+            </button>     
         </div>
+        
     </div>
 </div>
 

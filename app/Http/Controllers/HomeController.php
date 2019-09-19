@@ -7,6 +7,7 @@ use App\Relation;
 use App\User;
 use App\Like;
 use Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -61,6 +62,7 @@ class HomeController extends Controller
             return "You can't like yourself";
         }
     }
+    
     //Get all users to show in the list
     public function getUser($id)
     {       
@@ -70,5 +72,20 @@ class HomeController extends Controller
             'findUser' => User::find($id),
             'likes' => Like::all(),
         ]);
+    }
+
+    public function searchUser(request $request)
+    {        
+        if($request->searchInput)
+        {
+            $query = $request->searchInput;
+            $data = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%{$query}%")->get();
+            $output = '';
+            foreach($data as $d)
+            {
+                $output .= '<li style="list-style: none;"><a style="color:white;"href="'.route('home.getuser', [$d->id]). '">'.$d->first_name.' '.$d->last_name.'</a></li>';
+            }           
+            return $output;
+        }
     }
 }

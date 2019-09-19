@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Relation;
 use Auth;
+use Hash;
 
 class EditPageController extends Controller
 {
@@ -21,7 +22,6 @@ class EditPageController extends Controller
         else
         {
             return redirect()->route('home');
-
         }
     }
 
@@ -40,13 +40,22 @@ class EditPageController extends Controller
             'zipcode' => ['required', 'string', 'max:255'],
             'relation' => ['required', 'integer', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::id()],
+            'password' => ['required', 'string', 'min:8']
         ]); 
-        
-        $imageName = Auth::user()->image;
-        $imageSize = Auth::user()->image_size;
-        $defaultImageName = Auth::user()->image_original_name;
+            
         $user = Auth::user();
-      
+            
+        //Check if password matches if not throw error
+        if (!Hash::check($request->password, $user->password))
+        {
+            // $error = \Illuminate\Validation\ValidationException::withMessages([
+            //     'password' => ['Password mismatch']
+            // ]);
+
+            // throw $error;
+            return redirect()->back()->with('error', 'Password mismatch');
+        }
+
         //Image upload
         if($request->hasFile('imageUpload'))
         {       
@@ -69,6 +78,10 @@ class EditPageController extends Controller
                 $imageName = time().Auth::id().'.'.$image->getClientOriginalExtension();                            
                 $image->move($defaultPath, $imageName);
             }
+
+            $user->image = $imageName;
+            $user->image_size = $imageSize;
+            $user->image_original_name = $defaultImageName;
         }         
         
         //Save data
@@ -80,12 +93,9 @@ class EditPageController extends Controller
         $user->housenumbersuffix = $request->housenumbersuffix;      
         $user->zipcode = $request->zipcode;      
         $user->relation = $request->relation;      
-        $user->email = $request->email;      
-        $user->image = $imageName;
-        $user->image_size = $imageSize;
-        $user->image_original_name = $defaultImageName;
+        $user->email = $request->email;  
         $user->save();
            
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated successfully.');
     }
 }
